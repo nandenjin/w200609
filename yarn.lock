@@ -223,6 +223,11 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/dat.gui@^0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@types/dat.gui/-/dat.gui-0.7.5.tgz#8f4f87300ae553a57b246a7bf1b9fe5e13ca8b79"
+  integrity sha512-5AqLThlTiuDSOZA7XZFogRj/UdGKn/iIfdFPuh37kY4s7TjTt+YUOlUmcCrY6wAYFFyThtt2z8qZlYcdkhJZ5w==
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -281,6 +286,11 @@
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
   integrity sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
+
+"@types/stats@^0.16.30":
+  version "0.16.30"
+  resolved "https://registry.yarnpkg.com/@types/stats/-/stats-0.16.30.tgz#deb5fa6e59c6d67bd6e0f61a51ef630a83a84ce9"
+  integrity sha1-3rX6blnG1nvW4PYaUe9jCoOoTOk=
 
 "@types/tapable@*", "@types/tapable@^1.0.5":
   version "1.0.5"
@@ -1675,6 +1685,11 @@ dashdash@^1.12.0:
   integrity sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
   dependencies:
     assert-plus "^1.0.0"
+
+dat.gui@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/dat.gui/-/dat.gui-0.7.7.tgz#7f96dbd21621a76385203659aebfa264ee6ae89b"
+  integrity sha512-sRl/28gF/XRC5ywC9I4zriATTsQcpSsRG7seXCPnTkK8/EQMIbCu5NPMpICLGxX9ZEUvcXR3ArLYCtgreFoMDw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
@@ -5987,6 +6002,11 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
+stats.js@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/stats.js/-/stats.js-0.17.0.tgz#b1c3dc46d94498b578b7fd3985b81ace7131cc7d"
+  integrity sha1-scPcRtlEmLV4t/05hbgaznExzH0=
+
 "statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2", statuses@~1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
@@ -6382,6 +6402,11 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+three@^0.117.1:
+  version "0.117.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.117.1.tgz#a49bcb1a6ddea2f250003e42585dc3e78e92b9d3"
+  integrity sha512-t4zeJhlNzUIj9+ub0l6nICVimSuRTZJOqvk3Rmlu+YGdTOJ49Wna8p7aumpkXJakJfITiybfpYE1XN1o1Z34UQ==
 
 through2@^2.0.0:
   version "2.0.5"
