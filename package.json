@@ -1,8 +1,8 @@
 {
-  "name": "@nandenjin/web-experiment-starter",
-  "version": "0.1.0",
+  "name": "@nandenjin/w200609",
+  "version": "0.0.0",
   "main": "index.js",
-  "repository": "git@github.com:nandenjin/web-experiment-starter.git",
+  "repository": "git@github.com:nandenjin/w200609.git",
   "author": "Kazumi Inada <hello@nandenjin.com>",
   "license": "MIT",
   "private": true,
