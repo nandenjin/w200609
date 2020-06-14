@@ -17,8 +17,12 @@ module.exports = {
         loader: 'ts-loader',
       },
       {
-        test: /\.s[ac]ss/i,
+        test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.mp3$/i,
+        loader: 'file-loader',
       },
     ],
   },
