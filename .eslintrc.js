@@ -20,6 +20,7 @@ module.exports = {
         semi: false,
         allowParens: 'avoid',
         trailingComma: 'es5',
+        arrowParens: 'avoid',
       },
     ],
   },
