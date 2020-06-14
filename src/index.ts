@@ -16,14 +16,32 @@ const gui = new GUI({ autoPlace: false })
 gui.domElement.classList.add('gui')
 document.body.appendChild(gui.domElement)
 
+app.on('ready', () => {
+  gui.add(
+    {
+      start() {
+        if (app.running) return
+        app.audioContext.resume()
+        app.start()
+      },
+    },
+    'start'
+  )
+})
+
 function render() {
   requestAnimationFrame(render)
   stats.begin()
+  app.tick()
   app.renderTo(renderer)
   stats.end()
 }
 
-window.addEventListener('load', () => requestAnimationFrame(render))
+async function onLoad() {
+  requestAnimationFrame(render)
+}
+
+window.addEventListener('load', onLoad)
 
 function onWindowResize() {
   const w = window.innerWidth,
