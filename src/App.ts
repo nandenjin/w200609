@@ -21,21 +21,29 @@ class Point {
   geometry = pointGeometry
   material = new MeshBasicMaterial({ color: 0xffffff })
   mesh = new Mesh(this.geometry, this.material)
-  position = this.mesh.position
+  readonly position = this.mesh.position
   audioContext: AudioContext
+  pannerNode: PannerNode
 
   private prevTick = -1
   private prevTrigger = -1
 
   constructor({ audioContext }: { audioContext: AudioContext }) {
     this.audioContext = audioContext
+    const panner = audioContext.createPanner()
+    panner.panningModel = 'HRTF'
+    panner.distanceModel = 'inverse'
+    panner.maxDistance = 0.8
+    panner.refDistance = 0.03
+    panner.connect(audioContext.destination)
+    this.pannerNode = panner
   }
 
   trigger(buffer: AudioBuffer): void {
-    const { audioContext, prevTick } = this
+    const { audioContext, pannerNode, prevTick } = this
     const audio = audioContext.createBufferSource()
     audio.buffer = buffer
-    audio.connect(audioContext.destination)
+    audio.connect(pannerNode)
     audio.start(0)
 
     this.prevTrigger = prevTick
@@ -51,6 +59,12 @@ class Point {
     material.color.set((lightness << 16) + (lightness << 8) + lightness)
 
     this.prevTick = now
+  }
+
+  setPosition(position: Vector3): void {
+    const { mesh, pannerNode } = this
+    mesh.position.copy(position)
+    pannerNode.setPosition(position.x, position.y, position.z)
   }
 }
 
@@ -87,13 +101,13 @@ export class App extends EventEmitter {
 
     scene.add(new GridHelper(1, 10))
 
-    camera.position.set(1, 2, 1)
+    camera.position.set(0, 2, 1)
     camera.lookAt(0, 0, 0)
 
     for (let j = -0.5; j <= 0.5; j += 1 / 4) {
       for (let i = -0.5; i <= 0.5; i += 1 / 4) {
         const point = new Point({ audioContext })
-        point.position.set(i, 0, j)
+        point.setPosition(new Vector3(i, 0, j))
         scene.add(point.mesh)
 
         points.push(point)
@@ -157,7 +171,8 @@ export class App extends EventEmitter {
   }
 
   setListeningPoint(position: Vector3): void {
-    const { listeningPointMarker } = this
+    const { listeningPointMarker, audioContext } = this
     listeningPointMarker.position.copy(position)
+    audioContext.listener.setPosition(position.x, position.y, position.z)
   }
 }
