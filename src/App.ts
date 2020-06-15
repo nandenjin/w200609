@@ -9,7 +9,10 @@ import {
   Mesh,
   Vector3,
 } from 'three'
-import soundFilePath from './assets/sound.mp3'
+import bellSoundFilePath from './assets/bell.mp3'
+import clickSoundFilePath from './assets/click.mp3'
+
+export const soundFilePathes = [bellSoundFilePath, clickSoundFilePath]
 
 const pointGeometry = new BoxBufferGeometry(0.03, 0.03, 0.03)
 const LIGHTNESS_DECAY_MS = 1000
@@ -73,7 +76,12 @@ export class App extends EventEmitter {
   camera = new PerspectiveCamera()
 
   audioContext = new AudioContext()
-  audioBuffer: AudioBuffer | undefined
+  audioBuffers: AudioBuffer[] = []
+  audioBufferIndex = 0
+
+  get audioBuffer(): AudioBuffer | undefined {
+    return this.audioBuffers[this.audioBufferIndex]
+  }
 
   points: Point[] = []
   cycles: number[] = []
@@ -119,14 +127,24 @@ export class App extends EventEmitter {
     scene.add(listeningPointMarker)
     ;(async () => {
       const { audioContext } = this
-      const res = await fetch(soundFilePath)
-      if (res.ok) {
-        const fileBuffer = await res.arrayBuffer()
-        this.audioBuffer = await audioContext.decodeAudioData(fileBuffer)
+      try {
+        await Promise.all(
+          soundFilePathes.map(async (soundFilePath, i) => {
+            const res = await fetch(soundFilePath)
+            if (res.ok) {
+              const fileBuffer = await res.arrayBuffer()
+              this.audioBuffers[i] = await audioContext.decodeAudioData(
+                fileBuffer
+              )
+            } else {
+              console.error(res)
+              throw new Error('Failed to load audio data: ' + soundFilePath)
+            }
+          })
+        )
+
         this.emit('ready')
-      } else {
-        console.error('Failed to load audio data')
-        console.error(res)
+      } catch (e) {
         this.emit('error')
       }
     })()

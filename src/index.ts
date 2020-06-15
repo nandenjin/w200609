@@ -2,7 +2,7 @@ import './style/index.scss'
 import Stats from 'stats.js'
 import { GUI } from 'dat.gui'
 import { WebGLRenderer, Vector2, Vector3 } from 'three'
-import { App } from './App'
+import { App, soundFilePathes } from './App'
 
 const app = new App()
 
@@ -16,6 +16,12 @@ document.body.appendChild(stats.dom)
 const gui = new GUI({ autoPlace: false })
 gui.domElement.classList.add('gui')
 document.body.appendChild(gui.domElement)
+
+gui.add(
+  app,
+  'audioBufferIndex',
+  soundFilePathes.map((_, i) => i)
+)
 
 app.on('ready', () => {
   gui.add(
