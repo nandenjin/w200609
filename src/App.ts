@@ -7,11 +7,15 @@ import {
   BoxBufferGeometry,
   MeshBasicMaterial,
   Mesh,
+  Vector3,
 } from 'three'
 import soundFilePath from './assets/sound.mp3'
 
 const pointGeometry = new BoxBufferGeometry(0.03, 0.03, 0.03)
 const LIGHTNESS_DECAY_MS = 1000
+
+const listeningPointGeometry = new BoxBufferGeometry(0.03, 0.03, 0.03)
+const listeningPointMaterial = new MeshBasicMaterial({ color: 0xff0000 })
 
 class Point {
   geometry = pointGeometry
@@ -64,9 +68,22 @@ export class App extends EventEmitter {
 
   private prevTick = -1
 
+  listeningPointMarker = new Mesh(
+    listeningPointGeometry,
+    listeningPointMaterial
+  )
+
   constructor() {
     super()
-    const { scene, camera, points, cycles, offsets, audioContext } = this
+    const {
+      scene,
+      camera,
+      points,
+      cycles,
+      offsets,
+      audioContext,
+      listeningPointMarker,
+    } = this
 
     scene.add(new GridHelper(1, 10))
 
@@ -85,6 +102,7 @@ export class App extends EventEmitter {
       }
     }
 
+    scene.add(listeningPointMarker)
     ;(async () => {
       const { audioContext } = this
       const res = await fetch(soundFilePath)
@@ -136,5 +154,10 @@ export class App extends EventEmitter {
     const { camera } = this
     camera.aspect = w / h
     camera.updateProjectionMatrix()
+  }
+
+  setListeningPoint(position: Vector3): void {
+    const { listeningPointMarker } = this
+    listeningPointMarker.position.copy(position)
   }
 }
