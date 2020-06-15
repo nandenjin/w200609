@@ -1,12 +1,13 @@
 import './style/index.scss'
 import Stats from 'stats.js'
 import { GUI } from 'dat.gui'
-import { WebGLRenderer, Vector2, Raycaster, Vector3 } from 'three'
+import { WebGLRenderer, Vector2, Vector3 } from 'three'
 import { App } from './App'
 
 const app = new App()
 
 const renderer = new WebGLRenderer({ antialias: true })
+renderer.domElement.classList.add('renderer')
 document.body.appendChild(renderer.domElement)
 
 const stats = new Stats()
